@@ -16,6 +16,7 @@ exports.CreateAccountController = void 0;
 const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const bcryptjs_1 = require("bcryptjs");
 let CreateAccountController = class CreateAccountController {
     constructor(prisma) {
         this.prisma = prisma;
@@ -30,11 +31,12 @@ let CreateAccountController = class CreateAccountController {
         if (userWithSameEmail) {
             throw new common_1.ConflictException('User with same e-mail already exists.');
         }
+        const hashedPassword = await (0, bcryptjs_1.hash)(password, 8);
         await this.prisma.user.create({
             data: {
                 name,
                 email,
-                password,
+                password: hashedPassword,
             },
         });
     }
