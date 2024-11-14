@@ -20,10 +20,14 @@ exports.AuthModule = AuthModule = __decorate([
             passport_1.PassportModule,
             jwt_1.JwtModule.registerAsync({
                 inject: [config_1.ConfigService],
+                global: true,
                 useFactory(config) {
-                    const secret = config.get('JWT_SECRET', { infer: true });
+                    const privateKey = config.get('JWT_PRIVATE_KEY', { infer: true });
+                    const publicKey = config.get('JWT_PUBLIC_KEY', { infer: true });
                     return {
-                        secret,
+                        signOptions: { algorithm: 'RS256' },
+                        privateKey: Buffer.from(privateKey, 'base64'),
+                        publicKey: Buffer.from(publicKey, 'base64'),
                     };
                 },
             }),
