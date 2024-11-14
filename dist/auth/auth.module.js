@@ -6,27 +6,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("./prisma/prisma.service");
-const create_account_controller_1 = require("./controllers/create-account.controller");
 const config_1 = require("@nestjs/config");
-const env_1 = require("./env");
-const auth_module_1 = require("./auth/auth.module");
-let AppModule = class AppModule {
+const jwt_1 = require("@nestjs/jwt");
+const passport_1 = require("@nestjs/passport");
+let AuthModule = class AuthModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.AuthModule = AuthModule;
+exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({
-                validate: (env) => env_1.envSchema.parse(env),
-                isGlobal: true,
+            passport_1.PassportModule,
+            jwt_1.JwtModule.registerAsync({
+                inject: [config_1.ConfigService],
+                useFactory(config) {
+                    const secret = config.get('JWT_SECRET', { infer: true });
+                    return {
+                        secret,
+                    };
+                },
             }),
-            auth_module_1.AuthModule,
         ],
-        controllers: [create_account_controller_1.CreateAccountController],
-        providers: [prisma_service_1.PrismaService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], AuthModule);
+//# sourceMappingURL=auth.module.js.map
