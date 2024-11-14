@@ -17,6 +17,13 @@ const common_1 = require("@nestjs/common");
 const common_2 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const bcryptjs_1 = require("bcryptjs");
+const zod_1 = require("zod");
+const zod_validatition_pipe_1 = require("../pipes/zod-validatition-pipe");
+const createAccountBodySchema = zod_1.z.object({
+    name: zod_1.z.string(),
+    email: zod_1.z.string().email(),
+    password: zod_1.z.string().min(6),
+});
 let CreateAccountController = class CreateAccountController {
     constructor(prisma) {
         this.prisma = prisma;
@@ -45,6 +52,7 @@ exports.CreateAccountController = CreateAccountController;
 __decorate([
     (0, common_2.Post)(),
     (0, common_2.HttpCode)(201),
+    (0, common_1.UsePipes)(new zod_validatition_pipe_1.ZodValidationPipe(createAccountBodySchema)),
     __param(0, (0, common_2.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
