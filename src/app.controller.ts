@@ -1,9 +1,13 @@
 import { Controller, Get, Post } from '@nestjs/common'
 import { AppService } from './app.service'
+import { PrismaService } from './prisma/prisma.service'
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private prisma: PrismaService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -11,7 +15,7 @@ export class AppController {
   }
 
   @Post('/hello')
-  store(): string {
-    return 'This action adds a new hello'
+  async store() {
+    return await this.prisma.user.findMany()
   }
 }
