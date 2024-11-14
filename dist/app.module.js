@@ -10,12 +10,19 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("./prisma/prisma.service");
 const create_account_controller_1 = require("./controllers/create-account.controller");
+const config_1 = require("@nestjs/config");
+const env_1 = require("./env");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                validate: (env) => env_1.envSchema.parse(env),
+                isGlobal: true,
+            }),
+        ],
         controllers: [create_account_controller_1.CreateAccountController],
         providers: [prisma_service_1.PrismaService],
     })
