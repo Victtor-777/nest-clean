@@ -15,6 +15,7 @@ const prisma_questions_comments_repository_1 = require("./prisma/repositories/pr
 const prisma_answers_repository_1 = require("./prisma/repositories/prisma-answers-repository");
 const prisma_answer_comments_repository_1 = require("./prisma/repositories/prisma-answer-comments-repository");
 const prisma_answer_attachments_repository_1 = require("./prisma/repositories/prisma-answer-attachments-repository");
+const questions_repository_1 = require("../../domain/forum/application/repositories/questions-repository");
 let DatabaseModule = class DatabaseModule {
 };
 exports.DatabaseModule = DatabaseModule;
@@ -22,7 +23,10 @@ exports.DatabaseModule = DatabaseModule = __decorate([
     (0, common_1.Module)({
         providers: [
             prisma_service_1.PrismaService,
-            prisma_questions_repository_1.PrismaQuestionsRepository,
+            {
+                provide: questions_repository_1.QuestionsRepository,
+                useClass: prisma_questions_repository_1.PrismaQuestionsRepository,
+            },
             prisma_questions_comments_repository_1.PrismaQuestionCommentsRepository,
             prisma_question_attachments_repository_1.PrismaQuestionAttachmentsRepository,
             prisma_answers_repository_1.PrismaAnswersRepository,
@@ -31,7 +35,7 @@ exports.DatabaseModule = DatabaseModule = __decorate([
         ],
         exports: [
             prisma_service_1.PrismaService,
-            prisma_questions_repository_1.PrismaQuestionsRepository,
+            questions_repository_1.QuestionsRepository,
             prisma_questions_comments_repository_1.PrismaQuestionCommentsRepository,
             prisma_question_attachments_repository_1.PrismaQuestionAttachmentsRepository,
             prisma_answers_repository_1.PrismaAnswersRepository,

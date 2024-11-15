@@ -1,6 +1,6 @@
 import { UserPayload } from '@/infra/auth/jwt.strategy';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { z } from 'zod';
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question';
 declare const createQuestionBodySchema: z.ZodObject<{
     title: z.ZodString;
     content: z.ZodString;
@@ -13,9 +13,8 @@ declare const createQuestionBodySchema: z.ZodObject<{
 }>;
 type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>;
 export declare class CreateQuestionController {
-    private prisma;
-    constructor(prisma: PrismaService);
+    private createQuestion;
+    constructor(createQuestion: CreateQuestionUseCase);
     handle(body: CreateQuestionBodySchema, user: UserPayload): Promise<void>;
-    private convertToSlug;
 }
 export {};

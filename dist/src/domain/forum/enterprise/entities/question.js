@@ -13,17 +13,42 @@ class Question extends aggregate_root_1.AggregateRoot {
     get bestAnswerId() {
         return this.props.bestAnswerId;
     }
+    set bestAnswerId(bestAnswerId) {
+        if (bestAnswerId === undefined || bestAnswerId === null) {
+            return;
+        }
+        if (this.props.bestAnswerId === undefined ||
+            this.props.bestAnswerId === null ||
+            !bestAnswerId.equals(this.props.bestAnswerId)) {
+            this.addDomainEvent(new question_best_answer_chosen_event_1.QuestionBestAnswerChosenEvent(this, bestAnswerId));
+        }
+        this.props.bestAnswerId = bestAnswerId;
+        this.touch();
+    }
     get title() {
         return this.props.title;
     }
+    set title(title) {
+        this.props.title = title;
+        this.props.slug = slug_1.Slug.createFromText(title);
+        this.touch();
+    }
     get content() {
         return this.props.content;
+    }
+    set content(content) {
+        this.props.content = content;
+        this.touch();
     }
     get slug() {
         return this.props.slug;
     }
     get attachments() {
         return this.props.attachments;
+    }
+    set attachments(attachments) {
+        this.props.attachments = attachments;
+        this.touch();
     }
     get createdAt() {
         return this.props.createdAt;
@@ -39,30 +64,6 @@ class Question extends aggregate_root_1.AggregateRoot {
     }
     touch() {
         this.props.updatedAt = new Date();
-    }
-    set title(title) {
-        this.props.title = title;
-        this.props.slug = slug_1.Slug.createFromText(title);
-        this.touch();
-    }
-    set content(content) {
-        this.props.content = content;
-        this.touch();
-    }
-    set attachments(attachments) {
-        this.props.attachments = attachments;
-        this.touch();
-    }
-    set bestAnswerId(bestAnswerId) {
-        if (bestAnswerId === undefined) {
-            return;
-        }
-        if (this.props.bestAnswerId === undefined ||
-            !bestAnswerId.equals(this.props.bestAnswerId)) {
-            this.addDomainEvent(new question_best_answer_chosen_event_1.QuestionBestAnswerChosenEvent(this, bestAnswerId));
-        }
-        this.props.bestAnswerId = bestAnswerId;
-        this.touch();
     }
     static create(props, id) {
         const question = new Question({

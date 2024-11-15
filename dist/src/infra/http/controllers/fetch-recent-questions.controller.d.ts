@@ -7,14 +7,14 @@ export declare class FetchRecentQuestionsController {
     constructor(prisma: PrismaService);
     handle(page: PageQueryParamSchema): Promise<{
         questions: {
-            id: string;
-            title: string;
+            createdAt: Date;
+            authorId: string;
             content: string;
             slug: string;
-            createdAt: Date;
-            updateAt: Date | null;
-            authorId: string;
             bestAnswerId: string | null;
+            title: string;
+            id: string;
+            updateAt: Date | null;
         }[];
     }>;
 }

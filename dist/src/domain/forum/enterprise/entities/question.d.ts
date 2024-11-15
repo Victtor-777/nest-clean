@@ -16,18 +16,18 @@ export interface QuestionProps {
 export declare class Question extends AggregateRoot<QuestionProps> {
     get authorId(): UniqueEntityID;
     get bestAnswerId(): UniqueEntityID | undefined | null;
+    set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null);
     get title(): string;
+    set title(title: string);
     get content(): string;
+    set content(content: string);
     get slug(): Slug;
     get attachments(): QuestionAttachmentList;
+    set attachments(attachments: QuestionAttachmentList);
     get createdAt(): Date;
     get updatedAt(): Date | null | undefined;
     get isNew(): boolean;
     get excerpt(): string;
     private touch;
-    set title(title: string);
-    set content(content: string);
-    set attachments(attachments: QuestionAttachmentList);
-    set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null);
     static create(props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>, id?: UniqueEntityID): Question;
 }
