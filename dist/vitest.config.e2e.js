@@ -8,6 +8,7 @@ exports.default = (0, config_1.defineConfig)({
         include: ['**/*.e2e-spec.ts'],
         globals: true,
         root: './',
+        setupFiles: ['./test/setup-e2e.ts'],
     },
     plugins: [
         (0, vite_tsconfig_paths_1.default)(),
