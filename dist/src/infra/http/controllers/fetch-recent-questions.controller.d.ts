@@ -14,6 +14,7 @@ export declare class FetchRecentQuestionsController {
             createdAt: Date;
             updateAt: Date | null;
             authorId: string;
+            bestAnswerId: string | null;
         }[];
     }>;
 }

@@ -5,7 +5,7 @@ import { Optional } from '@/core/types/optional';
 import { QuestionAttachmentList } from './question-attachment-list';
 export interface QuestionProps {
     authorId: UniqueEntityID;
-    bestAnswerId?: UniqueEntityID;
+    bestAnswerId?: UniqueEntityID | null;
     title: string;
     content: string;
     slug: Slug;
@@ -15,7 +15,7 @@ export interface QuestionProps {
 }
 export declare class Question extends AggregateRoot<QuestionProps> {
     get authorId(): UniqueEntityID;
-    get bestAnswerId(): UniqueEntityID | undefined;
+    get bestAnswerId(): UniqueEntityID | undefined | null;
     get title(): string;
     get content(): string;
     get slug(): Slug;
@@ -28,6 +28,6 @@ export declare class Question extends AggregateRoot<QuestionProps> {
     set title(title: string);
     set content(content: string);
     set attachments(attachments: QuestionAttachmentList);
-    set bestAnswerId(bestAnswerId: UniqueEntityID | undefined);
+    set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null);
     static create(props: Optional<QuestionProps, 'createdAt' | 'slug' | 'attachments'>, id?: UniqueEntityID): Question;
 }
