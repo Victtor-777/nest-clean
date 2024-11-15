@@ -28,20 +28,49 @@ let PrismaQuestionsRepository = class PrismaQuestionsRepository {
         }
         return prisma_question_mapper_1.PrismaQuestionMapper.toDomain(question);
     }
-    findBySlug(slug) {
-        throw new Error('Method not implemented.');
+    async findBySlug(slug) {
+        const question = await this.prisma.question.findUnique({
+            where: {
+                slug,
+            },
+        });
+        if (!question) {
+            return null;
+        }
+        return prisma_question_mapper_1.PrismaQuestionMapper.toDomain(question);
     }
-    findManyRecent(params) {
-        throw new Error('Method not implemented.');
+    async findManyRecent({ page }) {
+        const questions = await this.prisma.question.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+            take: 20,
+            skip: (page - 1) * 20,
+        });
+        return questions.map(prisma_question_mapper_1.PrismaQuestionMapper.toDomain);
     }
-    save(question) {
-        throw new Error('Method not implemented.');
+    async save(question) {
+        const data = prisma_question_mapper_1.PrismaQuestionMapper.toPrisma(question);
+        await this.prisma.question.update({
+            where: {
+                id: data.id,
+            },
+            data,
+        });
     }
-    create(question) {
-        throw new Error('Method not implemented.');
+    async create(question) {
+        const data = prisma_question_mapper_1.PrismaQuestionMapper.toPrisma(question);
+        await this.prisma.question.create({
+            data,
+        });
     }
-    delete(question) {
-        throw new Error('Method not implemented.');
+    async delete(question) {
+        const data = prisma_question_mapper_1.PrismaQuestionMapper.toPrisma(question);
+        await this.prisma.question.delete({
+            where: {
+                id: data.id,
+            },
+        });
     }
 };
 exports.PrismaQuestionsRepository = PrismaQuestionsRepository;

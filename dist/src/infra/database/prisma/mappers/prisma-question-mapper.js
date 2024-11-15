@@ -18,6 +18,18 @@ class PrismaQuestionMapper {
             updatedAt: raw.updateAt,
         }, new unique_entity_id_1.UniqueEntityID(raw.id));
     }
+    static toPrisma(question) {
+        return {
+            id: question.id.toString(),
+            authorId: question.authorId.toString(),
+            bestAnswerId: question.bestAnswerId?.toString(),
+            title: question.title,
+            content: question.content,
+            slug: question.slug.value,
+            createdAt: question.createdAt,
+            updateAt: question.updatedAt,
+        };
+    }
 }
 exports.PrismaQuestionMapper = PrismaQuestionMapper;
 //# sourceMappingURL=prisma-question-mapper.js.map
