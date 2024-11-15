@@ -11,7 +11,7 @@ export interface QuestionProps {
     slug: Slug;
     attachments: QuestionAttachmentList;
     createdAt: Date;
-    updatedAt?: Date;
+    updatedAt?: Date | null;
 }
 export declare class Question extends AggregateRoot<QuestionProps> {
     get authorId(): UniqueEntityID;
@@ -21,7 +21,7 @@ export declare class Question extends AggregateRoot<QuestionProps> {
     get slug(): Slug;
     get attachments(): QuestionAttachmentList;
     get createdAt(): Date;
-    get updatedAt(): Date | undefined;
+    get updatedAt(): Date | null | undefined;
     get isNew(): boolean;
     get excerpt(): string;
     private touch;
