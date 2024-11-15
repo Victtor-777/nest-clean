@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountController = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../../prisma/prisma.service");
+const prisma_service_1 = require("../../database/prisma/prisma.service");
 const bcryptjs_1 = require("bcryptjs");
 const zod_1 = require("zod");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");

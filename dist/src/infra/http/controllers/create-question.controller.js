@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const current_user_decorator_1 = require("../../auth/current-user-decorator");
 const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
-const prisma_service_1 = require("../../prisma/prisma.service");
+const prisma_service_1 = require("../../database/prisma/prisma.service");
 const zod_1 = require("zod");
 const createQuestionBodySchema = zod_1.z.object({
     title: zod_1.z.string(),

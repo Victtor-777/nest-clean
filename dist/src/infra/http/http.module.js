@@ -12,19 +12,20 @@ const authenticate_controller_1 = require("./controllers/authenticate.controller
 const create_account_controller_1 = require("./controllers/create-account.controller");
 const create_question_controller_1 = require("./controllers/create-question.controller");
 const fetch_recent_questions_controller_1 = require("./controllers/fetch-recent-questions.controller");
-const prisma_service_1 = require("../prisma/prisma.service");
+const database_module_1 = require("../database/database.module");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
 exports.HttpModule = HttpModule = __decorate([
     (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule],
         controllers: [
             create_account_controller_1.CreateAccountController,
             authenticate_controller_1.AuthenticateController,
             create_question_controller_1.CreateQuestionController,
             fetch_recent_questions_controller_1.FetchRecentQuestionsController,
         ],
-        providers: [prisma_service_1.PrismaService],
+        providers: [],
     })
 ], HttpModule);
 //# sourceMappingURL=http.module.js.map

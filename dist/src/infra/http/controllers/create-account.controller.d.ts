@@ -1,4 +1,4 @@
-import { PrismaService } from '@/infra/prisma/prisma.service';
+import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { z } from 'zod';
 declare const createAccountBodySchema: z.ZodObject<{
     name: z.ZodString;
