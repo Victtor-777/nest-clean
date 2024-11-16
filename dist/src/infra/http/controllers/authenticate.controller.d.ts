@@ -1,6 +1,5 @@
-import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { z } from 'zod';
+import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student';
 declare const authenticateBodySchema: z.ZodObject<{
     email: z.ZodString;
     password: z.ZodString;
@@ -13,9 +12,8 @@ declare const authenticateBodySchema: z.ZodObject<{
 }>;
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>;
 export declare class AuthenticateController {
-    private jwt;
-    private prisma;
-    constructor(jwt: JwtService, prisma: PrismaService);
+    private authenticateStudent;
+    constructor(authenticateStudent: AuthenticateStudentUseCase);
     handle(body: AuthenticateBodySchema): Promise<{
         access_token: string;
     }>;
