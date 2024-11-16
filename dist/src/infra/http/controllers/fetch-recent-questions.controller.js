@@ -18,6 +18,7 @@ const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const zod_1 = require("zod");
 const fetch_recent_questions_1 = require("../../../domain/forum/application/use-cases/fetch-recent-questions");
+const question_presenter_1 = require("../presenters/question-presenter");
 const pageQueryParamSchema = zod_1.z
     .string()
     .optional()
@@ -30,10 +31,14 @@ let FetchRecentQuestionsController = class FetchRecentQuestionsController {
         this.fetchRecentQuestions = fetchRecentQuestions;
     }
     async handle(page) {
-        const questions = await this.fetchRecentQuestions.execute({
+        const result = await this.fetchRecentQuestions.execute({
             page,
         });
-        return { questions };
+        if (result.isLeft()) {
+            throw new Error();
+        }
+        const questions = result.value.questions;
+        return { questions: questions.map(question_presenter_1.QuestionPresenter.toHTTP) };
     }
 };
 exports.FetchRecentQuestionsController = FetchRecentQuestionsController;

@@ -6,11 +6,15 @@ export declare class FetchRecentQuestionsController {
     private fetchRecentQuestions;
     constructor(fetchRecentQuestions: FetchRecentQuestionsUseCase);
     handle(page: PageQueryParamSchema): Promise<{
-        questions: import("../../../core/either").Left<null, {
-            questions: import("../../../domain/forum/enterprise/entities/question").Question[];
-        }> | import("../../../core/either").Right<null, {
-            questions: import("../../../domain/forum/enterprise/entities/question").Question[];
-        }>;
+        questions: {
+            id: import("../../../core/entities/unique-entity-id").UniqueEntityID;
+            slug: import("../../../domain/forum/enterprise/entities/value-objects/slug").Slug;
+            title: string;
+            content: string;
+            bestAnswerId: string | undefined;
+            createdAt: Date;
+            updatedAt: Date | null | undefined;
+        }[];
     }>;
 }
 export {};
