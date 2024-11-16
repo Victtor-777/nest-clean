@@ -16,8 +16,8 @@ exports.FetchRecentQuestionsController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
-const prisma_service_1 = require("../../database/prisma/prisma.service");
 const zod_1 = require("zod");
+const fetch_recent_questions_1 = require("../../../domain/forum/application/use-cases/fetch-recent-questions");
 const pageQueryParamSchema = zod_1.z
     .string()
     .optional()
@@ -26,17 +26,12 @@ const pageQueryParamSchema = zod_1.z
     .pipe(zod_1.z.number().min(1));
 const queryValidationPipe = new zod_validation_pipe_1.ZodValidationPipe(pageQueryParamSchema);
 let FetchRecentQuestionsController = class FetchRecentQuestionsController {
-    constructor(prisma) {
-        this.prisma = prisma;
+    constructor(fetchRecentQuestions) {
+        this.fetchRecentQuestions = fetchRecentQuestions;
     }
     async handle(page) {
-        const perPage = 20;
-        const questions = await this.prisma.question.findMany({
-            take: perPage,
-            skip: (page - 1) * perPage,
-            orderBy: {
-                createdAt: 'desc',
-            },
+        const questions = await this.fetchRecentQuestions.execute({
+            page,
         });
         return { questions };
     }
@@ -52,6 +47,6 @@ __decorate([
 exports.FetchRecentQuestionsController = FetchRecentQuestionsController = __decorate([
     (0, common_1.Controller)('/questions'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JWTAuthGuard),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [fetch_recent_questions_1.FetchRecentQuestionsUseCase])
 ], FetchRecentQuestionsController);
 //# sourceMappingURL=fetch-recent-questions.controller.js.map

@@ -14,6 +14,7 @@ const create_question_controller_1 = require("./controllers/create-question.cont
 const fetch_recent_questions_controller_1 = require("./controllers/fetch-recent-questions.controller");
 const database_module_1 = require("../database/database.module");
 const create_question_1 = require("../../domain/forum/application/use-cases/create-question");
+const fetch_recent_questions_1 = require("../../domain/forum/application/use-cases/fetch-recent-questions");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -26,7 +27,7 @@ exports.HttpModule = HttpModule = __decorate([
             create_question_controller_1.CreateQuestionController,
             fetch_recent_questions_controller_1.FetchRecentQuestionsController,
         ],
-        providers: [create_question_1.CreateQuestionUseCase],
+        providers: [create_question_1.CreateQuestionUseCase, fetch_recent_questions_1.FetchRecentQuestionsUseCase],
     })
 ], HttpModule);
 //# sourceMappingURL=http.module.js.map

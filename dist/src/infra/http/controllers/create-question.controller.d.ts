@@ -5,11 +5,11 @@ declare const createQuestionBodySchema: z.ZodObject<{
     title: z.ZodString;
     content: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    title: string;
     content: string;
+    title: string;
 }, {
-    title: string;
     content: string;
+    title: string;
 }>;
 type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>;
 export declare class CreateQuestionController {

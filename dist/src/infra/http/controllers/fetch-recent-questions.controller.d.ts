@@ -1,21 +1,16 @@
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { z } from 'zod';
+import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions';
 declare const pageQueryParamSchema: z.ZodPipeline<z.ZodEffects<z.ZodDefault<z.ZodOptional<z.ZodString>>, number, string | undefined>, z.ZodNumber>;
 type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>;
 export declare class FetchRecentQuestionsController {
-    private prisma;
-    constructor(prisma: PrismaService);
+    private fetchRecentQuestions;
+    constructor(fetchRecentQuestions: FetchRecentQuestionsUseCase);
     handle(page: PageQueryParamSchema): Promise<{
-        questions: {
-            createdAt: Date;
-            authorId: string;
-            content: string;
-            slug: string;
-            bestAnswerId: string | null;
-            title: string;
-            id: string;
-            updateAt: Date | null;
-        }[];
+        questions: import("../../../core/either").Left<null, {
+            questions: import("../../../domain/forum/enterprise/entities/question").Question[];
+        }> | import("../../../core/either").Right<null, {
+            questions: import("../../../domain/forum/enterprise/entities/question").Question[];
+        }>;
     }>;
 }
 export {};
