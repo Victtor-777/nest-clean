@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const zod_1 = require("zod");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const register_student_1 = require("../../../domain/forum/application/use-cases/register-student");
+const student_already_exists_error_1 = require("../../../domain/forum/application/use-cases/errors/student-already-exists-error");
 const createAccountBodySchema = zod_1.z.object({
     name: zod_1.z.string(),
     email: zod_1.z.string().email(),
@@ -34,7 +35,13 @@ let CreateAccountController = class CreateAccountController {
             password,
         });
         if (result.isLeft()) {
-            throw new Error();
+            const error = result.value;
+            switch (error.constructor) {
+                case student_already_exists_error_1.StudentAlreadyExistsError:
+                    throw new common_1.ConflictException(error.message);
+                default:
+                    throw new common_1.BadRequestException(error.message);
+            }
         }
     }
 };

@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const zod_1 = require("zod");
 const authenticate_student_1 = require("../../../domain/forum/application/use-cases/authenticate-student");
+const wrong_credentials_error_1 = require("../../../domain/forum/application/use-cases/errors/wrong-credentials-error");
 const authenticateBodySchema = zod_1.z.object({
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(6),
@@ -32,7 +33,13 @@ let AuthenticateController = class AuthenticateController {
             password,
         });
         if (result.isLeft()) {
-            throw new Error();
+            const error = result.value;
+            switch (error.constructor) {
+                case wrong_credentials_error_1.WrongCredentialsError:
+                    throw new common_1.UnauthorizedException(error.message);
+                default:
+                    throw new common_1.BadRequestException(error.message);
+            }
         }
         const { accessToken } = result.value;
         return {

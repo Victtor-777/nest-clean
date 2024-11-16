@@ -31,12 +31,15 @@ let CreateQuestionController = class CreateQuestionController {
     async handle(body, user) {
         const { title, content } = body;
         const userId = user.sub;
-        await this.createQuestion.execute({
+        const result = await this.createQuestion.execute({
             title,
             content,
             authorId: userId,
             attachmentsIds: [],
         });
+        if (result.isLeft()) {
+            throw new common_1.BadRequestException();
+        }
     }
 };
 exports.CreateQuestionController = CreateQuestionController;

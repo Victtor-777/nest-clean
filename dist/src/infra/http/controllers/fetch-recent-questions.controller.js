@@ -35,7 +35,7 @@ let FetchRecentQuestionsController = class FetchRecentQuestionsController {
             page,
         });
         if (result.isLeft()) {
-            throw new Error();
+            throw new common_1.BadRequestException();
         }
         const questions = result.value.questions;
         return { questions: questions.map(question_presenter_1.QuestionPresenter.toHTTP) };
