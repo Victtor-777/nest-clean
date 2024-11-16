@@ -1,5 +1,5 @@
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { z } from 'zod';
+import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student';
 declare const createAccountBodySchema: z.ZodObject<{
     name: z.ZodString;
     email: z.ZodString;
@@ -15,8 +15,8 @@ declare const createAccountBodySchema: z.ZodObject<{
 }>;
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>;
 export declare class CreateAccountController {
-    private prisma;
-    constructor(prisma: PrismaService);
+    private registerStudent;
+    constructor(registerStudent: RegisterStudentUseCase);
     handle(body: CreateAccountBodySchema): Promise<void>;
 }
 export {};

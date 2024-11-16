@@ -14,37 +14,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountController = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../../database/prisma/prisma.service");
-const bcryptjs_1 = require("bcryptjs");
 const zod_1 = require("zod");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
+const register_student_1 = require("../../../domain/forum/application/use-cases/register-student");
 const createAccountBodySchema = zod_1.z.object({
     name: zod_1.z.string(),
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(6),
 });
 let CreateAccountController = class CreateAccountController {
-    constructor(prisma) {
-        this.prisma = prisma;
+    constructor(registerStudent) {
+        this.registerStudent = registerStudent;
     }
     async handle(body) {
         const { name, email, password } = body;
-        const userWithSameEmail = await this.prisma.user.findUnique({
-            where: {
-                email,
-            },
+        const result = await this.registerStudent.execute({
+            name,
+            email,
+            password,
         });
-        if (userWithSameEmail) {
-            throw new common_1.ConflictException('User with same e-mail already exists.');
+        if (result.isLeft()) {
+            throw new Error();
         }
-        const hashedPassword = await (0, bcryptjs_1.hash)(password, 8);
-        await this.prisma.user.create({
-            data: {
-                name,
-                email,
-                password: hashedPassword,
-            },
-        });
     }
 };
 exports.CreateAccountController = CreateAccountController;
@@ -59,6 +50,6 @@ __decorate([
 ], CreateAccountController.prototype, "handle", null);
 exports.CreateAccountController = CreateAccountController = __decorate([
     (0, common_1.Controller)('/accounts'),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [register_student_1.RegisterStudentUseCase])
 ], CreateAccountController);
 //# sourceMappingURL=create-account.controller.js.map
