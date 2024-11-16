@@ -14,7 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FetchRecentQuestionsController = void 0;
 const common_1 = require("@nestjs/common");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const zod_1 = require("zod");
 const fetch_recent_questions_1 = require("../../../domain/forum/application/use-cases/fetch-recent-questions");
@@ -51,7 +50,6 @@ __decorate([
 ], FetchRecentQuestionsController.prototype, "handle", null);
 exports.FetchRecentQuestionsController = FetchRecentQuestionsController = __decorate([
     (0, common_1.Controller)('/questions'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JWTAuthGuard),
     __metadata("design:paramtypes", [fetch_recent_questions_1.FetchRecentQuestionsUseCase])
 ], FetchRecentQuestionsController);
 //# sourceMappingURL=fetch-recent-questions.controller.js.map

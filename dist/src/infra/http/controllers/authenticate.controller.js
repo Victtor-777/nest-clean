@@ -18,6 +18,7 @@ const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const zod_1 = require("zod");
 const authenticate_student_1 = require("../../../domain/forum/application/use-cases/authenticate-student");
 const wrong_credentials_error_1 = require("../../../domain/forum/application/use-cases/errors/wrong-credentials-error");
+const public_1 = require("../../auth/public");
 const authenticateBodySchema = zod_1.z.object({
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(6),
@@ -58,6 +59,7 @@ __decorate([
 ], AuthenticateController.prototype, "handle", null);
 exports.AuthenticateController = AuthenticateController = __decorate([
     (0, common_1.Controller)('/sessions'),
+    (0, public_1.Public)(),
     __metadata("design:paramtypes", [authenticate_student_1.AuthenticateStudentUseCase])
 ], AuthenticateController);
 //# sourceMappingURL=authenticate.controller.js.map

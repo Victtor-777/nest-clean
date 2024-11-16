@@ -18,6 +18,7 @@ const zod_1 = require("zod");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const register_student_1 = require("../../../domain/forum/application/use-cases/register-student");
 const student_already_exists_error_1 = require("../../../domain/forum/application/use-cases/errors/student-already-exists-error");
+const public_1 = require("../../auth/public");
 const createAccountBodySchema = zod_1.z.object({
     name: zod_1.z.string(),
     email: zod_1.z.string().email(),
@@ -57,6 +58,7 @@ __decorate([
 ], CreateAccountController.prototype, "handle", null);
 exports.CreateAccountController = CreateAccountController = __decorate([
     (0, common_1.Controller)('/accounts'),
+    (0, public_1.Public)(),
     __metadata("design:paramtypes", [register_student_1.RegisterStudentUseCase])
 ], CreateAccountController);
 //# sourceMappingURL=create-account.controller.js.map

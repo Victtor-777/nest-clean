@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateQuestionController = void 0;
 const common_1 = require("@nestjs/common");
 const current_user_decorator_1 = require("../../auth/current-user-decorator");
-const jwt_auth_guard_1 = require("../../auth/jwt-auth.guard");
 const zod_validation_pipe_1 = require("../pipes/zod-validation-pipe");
 const zod_1 = require("zod");
 const create_question_1 = require("../../../domain/forum/application/use-cases/create-question");
@@ -53,7 +52,6 @@ __decorate([
 ], CreateQuestionController.prototype, "handle", null);
 exports.CreateQuestionController = CreateQuestionController = __decorate([
     (0, common_1.Controller)('/questions'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JWTAuthGuard),
     __metadata("design:paramtypes", [create_question_1.CreateQuestionUseCase])
 ], CreateQuestionController);
 //# sourceMappingURL=create-question.controller.js.map
