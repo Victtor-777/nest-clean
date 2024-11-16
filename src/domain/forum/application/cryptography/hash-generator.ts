@@ -1,0 +1,11 @@
+export abstract class HashGenerator {
+  abstract hash(plain: string): Promise<string>
+}
+
+// SOLID
+
+// Single Responsibility Principle
+// Open Closed Principle
+// Liskov Substitution Principle
+// Interface Segregation Principle
+// Dependency Inversion Principle
