@@ -18,6 +18,11 @@ const prisma_answer_attachments_repository_1 = require("./prisma/repositories/pr
 const questions_repository_1 = require("../../domain/forum/application/repositories/questions-repository");
 const students_repository_1 = require("../../domain/forum/application/repositories/students-repository");
 const prisma_students_repository_1 = require("./prisma/repositories/prisma-students-repository");
+const answer_comments_repository_1 = require("../../domain/forum/application/repositories/answer-comments-repository");
+const answers_repository_1 = require("../../domain/forum/application/repositories/answers-repository");
+const question_attachments_repository_1 = require("../../domain/forum/application/repositories/question-attachments-repository");
+const question_comments_repository_1 = require("../../domain/forum/application/repositories/question-comments-repository");
+const answer_attachments_repository_1 = require("../../domain/forum/application/repositories/answer-attachments-repository");
 let DatabaseModule = class DatabaseModule {
 };
 exports.DatabaseModule = DatabaseModule;
@@ -33,21 +38,36 @@ exports.DatabaseModule = DatabaseModule = __decorate([
                 provide: students_repository_1.StudentsRepository,
                 useClass: prisma_students_repository_1.PrismaStudentsRepository,
             },
-            prisma_questions_comments_repository_1.PrismaQuestionCommentsRepository,
-            prisma_question_attachments_repository_1.PrismaQuestionAttachmentsRepository,
-            prisma_answers_repository_1.PrismaAnswersRepository,
-            prisma_answer_comments_repository_1.PrismaAnswerCommentsRepository,
-            prisma_answer_attachments_repository_1.PrismaAnswerAttachmentRepository,
+            {
+                provide: question_comments_repository_1.QuestionCommentsRepository,
+                useClass: prisma_questions_comments_repository_1.PrismaQuestionCommentsRepository,
+            },
+            {
+                provide: question_attachments_repository_1.QuestionAttachmentsRepository,
+                useClass: prisma_question_attachments_repository_1.PrismaQuestionAttachmentsRepository,
+            },
+            {
+                provide: answers_repository_1.AnswersRepository,
+                useClass: prisma_answers_repository_1.PrismaAnswersRepository,
+            },
+            {
+                provide: answer_comments_repository_1.AnswerCommentsRepository,
+                useClass: prisma_answer_comments_repository_1.PrismaAnswerCommentsRepository,
+            },
+            {
+                provide: answer_attachments_repository_1.AnswerAttachmentsRepository,
+                useClass: prisma_answer_attachments_repository_1.PrismaAnswerAttachmentRepository,
+            },
         ],
         exports: [
             prisma_service_1.PrismaService,
             questions_repository_1.QuestionsRepository,
             students_repository_1.StudentsRepository,
-            prisma_questions_comments_repository_1.PrismaQuestionCommentsRepository,
-            prisma_question_attachments_repository_1.PrismaQuestionAttachmentsRepository,
-            prisma_answers_repository_1.PrismaAnswersRepository,
-            prisma_answer_comments_repository_1.PrismaAnswerCommentsRepository,
-            prisma_answer_attachments_repository_1.PrismaAnswerAttachmentRepository,
+            question_comments_repository_1.QuestionCommentsRepository,
+            question_attachments_repository_1.QuestionAttachmentsRepository,
+            answers_repository_1.AnswersRepository,
+            answer_comments_repository_1.AnswerCommentsRepository,
+            answer_attachments_repository_1.AnswerAttachmentsRepository,
         ],
     })
 ], DatabaseModule);
