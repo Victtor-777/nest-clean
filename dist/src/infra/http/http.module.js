@@ -22,6 +22,8 @@ const get_question_by_slug_controller_1 = require("./controllers/get-question-by
 const get_question_by_slug_1 = require("../../domain/forum/application/use-cases/get-question-by-slug");
 const edit_question_controller_1 = require("./controllers/edit-question.controller");
 const edit_question_1 = require("../../domain/forum/application/use-cases/edit-question");
+const delete_question_controller_1 = require("./controllers/delete-question.controller");
+const delete_question_1 = require("../../domain/forum/application/use-cases/delete-question");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -35,6 +37,7 @@ exports.HttpModule = HttpModule = __decorate([
             fetch_recent_questions_controller_1.FetchRecentQuestionsController,
             get_question_by_slug_controller_1.GetQuestionBySlugController,
             edit_question_controller_1.EditQuestionController,
+            delete_question_controller_1.DeleteQuestionController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
@@ -43,6 +46,7 @@ exports.HttpModule = HttpModule = __decorate([
             authenticate_student_1.AuthenticateStudentUseCase,
             get_question_by_slug_1.GetQuestionBySlugUseCase,
             edit_question_1.EditQuestionUseCase,
+            delete_question_1.DeleteQuestionUseCase,
         ],
     })
 ], HttpModule);
