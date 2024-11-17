@@ -42,6 +42,8 @@ const comment_on_answer_controller_1 = require("./controllers/comment-on-answer.
 const comment_on_answer_1 = require("../../domain/forum/application/use-cases/comment-on-answer");
 const delete_answer_comment_controller_1 = require("./controllers/delete-answer-comment.controller");
 const delete_answer_comment_1 = require("../../domain/forum/application/use-cases/delete-answer-comment");
+const fetch_question_comments_controller_1 = require("./controllers/fetch-question-comments.controller");
+const fetch_question_comments_1 = require("../../domain/forum/application/use-cases/fetch-question-comments");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -65,6 +67,7 @@ exports.HttpModule = HttpModule = __decorate([
             delete_question_comment_controller_1.DeleteQuestionCommentController,
             comment_on_answer_controller_1.CommentOnAnswerController,
             delete_answer_comment_controller_1.DeleteAnswerCommentController,
+            fetch_question_comments_controller_1.FetchQuestionCommentsController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
@@ -83,6 +86,7 @@ exports.HttpModule = HttpModule = __decorate([
             delete_question_comment_1.DeleteQuestionCommentUseCase,
             comment_on_answer_1.CommentOnAnswerUseCase,
             delete_answer_comment_1.DeleteAnswerCommentUseCase,
+            fetch_question_comments_1.FetchQuestionCommentsUseCase,
         ],
     })
 ], HttpModule);
