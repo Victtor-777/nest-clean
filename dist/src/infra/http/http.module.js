@@ -28,6 +28,8 @@ const answer_question_controller_1 = require("./controllers/answer-question.cont
 const answer_question_1 = require("../../domain/forum/application/use-cases/answer-question");
 const edit_answer_controller_1 = require("./controllers/edit-answer.controller");
 const edit_answer_1 = require("../../domain/forum/application/use-cases/edit-answer");
+const delete_answer_controller_1 = require("./controllers/delete-answer.controller");
+const delete_answer_1 = require("../../domain/forum/application/use-cases/delete-answer");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -44,6 +46,7 @@ exports.HttpModule = HttpModule = __decorate([
             delete_question_controller_1.DeleteQuestionController,
             answer_question_controller_1.AnswerQuestionController,
             edit_answer_controller_1.EditAnswerController,
+            delete_answer_controller_1.DeleteAnswerController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
@@ -55,6 +58,7 @@ exports.HttpModule = HttpModule = __decorate([
             delete_question_1.DeleteQuestionUseCase,
             answer_question_1.AnswerQuestionUseCase,
             edit_answer_1.EditAnswerUseCase,
+            delete_answer_1.DeleteAnswerUseCase,
         ],
     })
 ], HttpModule);

@@ -57,7 +57,7 @@ let PrismaAnswersRepository = class PrismaAnswersRepository {
         });
     }
     async delete(answer) {
-        await this.prisma.comment.delete({
+        await this.prisma.answer.delete({
             where: {
                 id: answer.id.toString(),
             },
