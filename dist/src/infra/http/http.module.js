@@ -18,6 +18,8 @@ const fetch_recent_questions_1 = require("../../domain/forum/application/use-cas
 const register_student_1 = require("../../domain/forum/application/use-cases/register-student");
 const authenticate_student_1 = require("../../domain/forum/application/use-cases/authenticate-student");
 const cryptography_module_1 = require("../cryptography/cryptography.module");
+const get_question_by_slug_controller_1 = require("./controllers/get-question-by-slug.controller");
+const get_question_by_slug_1 = require("../../domain/forum/application/use-cases/get-question-by-slug");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -29,12 +31,14 @@ exports.HttpModule = HttpModule = __decorate([
             authenticate_controller_1.AuthenticateController,
             create_question_controller_1.CreateQuestionController,
             fetch_recent_questions_controller_1.FetchRecentQuestionsController,
+            get_question_by_slug_controller_1.GetQuestionBySlugController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
             fetch_recent_questions_1.FetchRecentQuestionsUseCase,
             register_student_1.RegisterStudentUseCase,
             authenticate_student_1.AuthenticateStudentUseCase,
+            get_question_by_slug_1.GetQuestionBySlugUseCase,
         ],
     })
 ], HttpModule);
