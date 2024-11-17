@@ -32,6 +32,8 @@ const delete_answer_controller_1 = require("./controllers/delete-answer.controll
 const delete_answer_1 = require("../../domain/forum/application/use-cases/delete-answer");
 const fetch_question_answers_controller_1 = require("./controllers/fetch-question-answers.controller");
 const fetch_question_answers_1 = require("../../domain/forum/application/use-cases/fetch-question-answers");
+const choose_question_best_answer_controller_1 = require("./controllers/choose-question-best-answer.controller");
+const choose_question_best_answer_1 = require("../../domain/forum/application/use-cases/choose-question-best-answer");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -50,6 +52,7 @@ exports.HttpModule = HttpModule = __decorate([
             edit_answer_controller_1.EditAnswerController,
             delete_answer_controller_1.DeleteAnswerController,
             fetch_question_answers_controller_1.FetchQuestionAnswersController,
+            choose_question_best_answer_controller_1.ChooseQuestionBestAnswerController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
@@ -63,6 +66,7 @@ exports.HttpModule = HttpModule = __decorate([
             edit_answer_1.EditAnswerUseCase,
             delete_answer_1.DeleteAnswerUseCase,
             fetch_question_answers_1.FetchQuestionAnswersUseCase,
+            choose_question_best_answer_1.ChooseQuestionBestAnswerUseCase,
         ],
     })
 ], HttpModule);
