@@ -46,6 +46,7 @@ const fetch_question_comments_controller_1 = require("./controllers/fetch-questi
 const fetch_question_comments_1 = require("../../domain/forum/application/use-cases/fetch-question-comments");
 const fetch_answer_comments_controller_1 = require("./controllers/fetch-answer-comments.controller");
 const fetch_answer_comments_1 = require("../../domain/forum/application/use-cases/fetch-answer-comments");
+const upload_attachment_controller_1 = require("./controllers/upload-attachment.controller");
 let HttpModule = class HttpModule {
 };
 exports.HttpModule = HttpModule;
@@ -71,6 +72,7 @@ exports.HttpModule = HttpModule = __decorate([
             delete_answer_comment_controller_1.DeleteAnswerCommentController,
             fetch_question_comments_controller_1.FetchQuestionCommentsController,
             fetch_answer_comments_controller_1.FetchAnswerCommentsController,
+            upload_attachment_controller_1.UploadAttachmentController,
         ],
         providers: [
             create_question_1.CreateQuestionUseCase,
